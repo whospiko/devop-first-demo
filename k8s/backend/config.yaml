@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: the-capy
+data:
+  # Non-sensitive .env variables
+  DB_PORT: "5432"
+  DB_USER: "capy_user"
+  DB_NAME: "capy_db"
+  DB_HOST: "capy-cluster-rw"

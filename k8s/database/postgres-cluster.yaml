@@ -1,0 +1,20 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: capy-cluster
+  namespace: the-capy
+spec:
+  # 1 instance is perfect for development on a single VM. 
+  # (You can easily change this to 3 later if you add more VMs for high availability!)
+  instances: 1
+  
+  # Tell CNPG to use K3s's built-in local-path storage
+  storage:
+    size: 5Gi
+    storageClass: local-path
+    
+  # Bootstrap the initial database and user for your Express backend
+  bootstrap:
+    initdb:
+      database: capy_db
+      owner: capy_user

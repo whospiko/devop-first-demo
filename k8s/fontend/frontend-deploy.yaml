@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: the-capy
+  labels:
+    app: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: hengkakada/fronttest:v0.1
+        ports:
+        - containerPort: 3000 # Next.js standalone mode runs on port 3000 by default
+
+        # Uncomment below if you need server-side environment variables for Next.js
+        envFrom:
+          - secretRef:
+              name: frontend-secrets
